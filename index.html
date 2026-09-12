@@ -29,9 +29,9 @@ body {
     color: var(--text);
 }
 
-/* DEMO WARNING */
+/*  WARNING */
 
-.demo-banner {
+.banner {
     background: #ffd83d;
     color: #3d3200;
     text-align: center;
@@ -157,7 +157,7 @@ input:focus {
     background: var(--blue-dark);
 }
 
-.demo-note {
+.note {
     margin-top: 22px;
     padding: 13px;
     border-radius: 9px;
@@ -545,7 +545,7 @@ input:focus {
 
             <div class="user">
 
-                <span>Demo User</span>
+                <span> User</span>
 
                 <div class="avatar">
                     DU
@@ -563,7 +563,7 @@ input:focus {
             <div class="account-card blue">
 
                 <div class="account-name">
-                    Demo Checking
+                   Checking
                 </div>
 
                 <div class="balance">
@@ -580,7 +580,7 @@ input:focus {
             <div class="account-card">
 
                 <div class="account-name">
-                    Demo Savings
+                     Savings
                 </div>
 
                 <div class="balance">
@@ -597,7 +597,7 @@ input:focus {
             <div class="account-card">
 
                 <div class="account-name">
-                    Total Demo Balance
+                    Total  Balance
                 </div>
 
                 <div class="balance">
@@ -636,7 +636,7 @@ input:focus {
                         <div>
 
                             <div class="transaction-name">
-                                Demo Coffee Shop
+                                 Coffee Shop
                             </div>
 
                             <div class="transaction-date">
@@ -665,7 +665,7 @@ input:focus {
                         <div>
 
                             <div class="transaction-name">
-                                Demo Game Store
+                                 Game Store
                             </div>
 
                             <div class="transaction-date">
@@ -694,7 +694,7 @@ input:focus {
                         <div>
 
                             <div class="transaction-name">
-                                Demo Payroll
+                                 Payroll
                             </div>
 
                             <div class="transaction-date">
@@ -723,7 +723,7 @@ input:focus {
                         <div>
 
                             <div class="transaction-name">
-                                Demo Market
+                                 Market
                             </div>
 
                             <div class="transaction-date">
@@ -751,17 +751,17 @@ input:focus {
 
                 <div class="action">
                     <div class="action-icon">💸</div>
-                    <div>Transfer demo money</div>
+                    <div>Transfer  money</div>
                 </div>
 
                 <div class="action">
                     <div class="action-icon">📄</div>
-                    <div>View demo statement</div>
+                    <div>View  statement</div>
                 </div>
 
                 <div class="action">
                     <div class="action-icon">💳</div>
-                    <div>Manage demo card</div>
+                    <div>Manage  card</div>
                 </div>
 
                 <div class="action">
@@ -780,8 +780,6 @@ input:focus {
             font-size:12px;
             text-align:center;
         ">
-            FakeBank Lab is a fictional offline demonstration.
-            It is not a real financial institution.
         </div>
 
     </main>
@@ -817,7 +815,7 @@ function login() {
     let username = usernameInput.value.trim();
 
     if (username === "") {
-        username = "Demo User";
+        username = "User";
     }
 
     let displayName = username.split("@")[0];
@@ -869,7 +867,7 @@ function logout() {
     document.getElementById("password").type = "password";
     document.getElementById("eye").textContent = "👁";
 
-    document.querySelector(".user span").textContent = "Demo User";
+    document.querySelector(".user span").textContent = "User";
     document.querySelector(".avatar").textContent = "DU";
 
     document.querySelector(".welcome h1").textContent =
