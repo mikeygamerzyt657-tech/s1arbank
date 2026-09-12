@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⭐ Star Bank</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --blue: #174ea6;
+    --blue-dark: #103b80;
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --text: #172033;
+    --muted: #697386;
+    --border: #e4e8ef;
+    --green: #168447;
+    --red: #c83b3b;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* DEMO WARNING */
+
+.demo-banner {
+    background: #ffd83d;
+    color: #3d3200;
+    text-align: center;
+    padding: 9px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* LOGIN */
+
+.login-page {
+    min-height: calc(100vh - 38px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.login-card {
+    width: 420px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 15px 45px rgba(20,35,60,.10);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 32px;
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--blue);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+}
+
+.logo-text {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.login-card h1 {
+    margin: 0 0 8px;
+    font-size: 28px;
+}
+
+.subtitle {
+    color: var(--muted);
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin: 18px 0 8px;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #ccd3df;
+    border-radius: 9px;
+    padding: 0 14px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(23,78,166,.12);
+}
+
+.password-box {
+    position: relative;
+}
+
+.password-box input {
+    padding-right: 50px;
+}
+
+.eye {
+    position: absolute;
+    right: 7px;
+    top: 5px;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 7px;
+}
+
+.eye:hover {
+    background: #eef2f8;
+}
+
+.primary-button {
+    width: 100%;
+    height: 49px;
+    margin-top: 25px;
+    border: 0;
+    border-radius: 9px;
+    background: var(--blue);
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.primary-button:hover {
+    background: var(--blue-dark);
+}
+
+.demo-note {
+    margin-top: 22px;
+    padding: 13px;
+    border-radius: 9px;
+    background: #f3f6fa;
+    color: var(--muted);
+    font-size: 12px;
+    text-align: center;
+}
+
+/* APP */
+
+.app {
+    display: none;
+    min-height: calc(100vh - 38px);
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 38px;
+    bottom: 0;
+    width: 240px;
+    background: #102a54;
+    color: white;
+    padding: 24px 15px;
+}
+
+.sidebar-logo {
+    padding: 8px 14px 28px;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.nav-item {
+    padding: 13px 15px;
+    margin: 4px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #dce7f7;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background: rgba(255,255,255,.12);
+    color: white;
+}
+
+.main {
+    margin-left: 240px;
+    padding: 35px;
+    max-width: 1400px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.welcome h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.welcome p {
+    color: var(--muted);
+    margin: 7px 0 0;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.avatar {
+    width: 42px;
+    height: 42px;
+    background: #dce8fb;
+    color: var(--blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+}
+
+/* CARDS */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.account-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 24px;
+}
+
+.account-card.blue {
+    background: linear-gradient(135deg, #174ea6, #2867c7);
+    color: white;
+}
+
+.account-name {
+    font-size: 14px;
+    opacity: .8;
+}
+
+.balance {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 17px 0 7px;
+}
+
+.account-number {
+    font-size: 13px;
+    opacity: .75;
+}
+
+/* CONTENT */
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 22px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 24px;
+}
+
+.panel h2 {
+    margin: 0 0 20px;
+    font-size: 19px;
+}
+
+.transaction {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.transaction:last-child {
+    border-bottom: 0;
+}
+
+.transaction-left {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+}
+
+.transaction-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #edf2f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transaction-name {
+    font-weight: 700;
+}
+
+.transaction-date {
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.positive {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.negative {
+    color: var(--red);
+    font-weight: 700;
+}
+
+/* QUICK ACTIONS */
+
+.action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.action:hover {
+    background: #f6f8fb;
+}
+
+.action-icon {
+    font-size: 20px;
+}
+
+/* LOGOUT */
+
+.logout {
+    width: 100%;
+    margin-top: 25px;
+    padding: 11px;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.logout:hover {
+    background: rgba(255,255,255,.1);
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 900px) {
+    .sidebar {
+        width: 190px;
+    }
+
+    .main {
+        margin-left: 190px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media(max-width: 650px) {
+    .sidebar {
+        display: none;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .login-card {
+        padding: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+
+<section class="login-page" id="loginPage">
+
+    <div class="login-card">
+
+        <div class="logo">
+            <div class="logo-icon">⭐</div>
+            <div class="logo-text">Star Bank</div>
+        </div>
+
+        <h1>Welcome back</h1>
+
+        <div class="subtitle">
+            Sign in to your Star Bank account
+        </div>
+
+        <label for="username">
+           Username
+        </label>
+
+        <input
+            id="username"
+            type="text"
+            placeholder="Example123"
+            autocomplete="off"
+        >
+
+        <label for="password">
+            Password
+        </label>
+
+        <div class="password-box">
+
+            <input
+                id="password"
+                type="password"
+                placeholder="***********"
+                autocomplete="off"
+            >
+
+            <button
+                class="eye"
+                id="eye"
+                onclick="togglePassword()"
+                type="button"
+            >👁</button>
+
+        </div>
+
+        <button
+            class="primary-button"
+            onclick="login()"
+        >
+            Sign in
+        </button>
+    </div>
+
+</section>
+
+
+<!-- DASHBOARD -->
+
+<section class="app" id="app">
+
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            ⭐Star Bank
+        </div>
+
+        <div class="nav-item active">
+            🏠 &nbsp; Overview
+        </div>
+
+        <div class="nav-item">
+            💳 &nbsp; Accounts
+        </div>
+
+        <div class="nav-item">
+            💸 &nbsp; Transfers
+        </div>
+
+        <div class="nav-item">
+            📄 &nbsp; Statements
+        </div>
+
+        <div class="nav-item">
+            ⚙️ &nbsp; Settings
+        </div>
+
+        <button
+            class="logout"
+            onclick="logout()"
+        >
+            Log out
+        </button>
+
+    </aside>
+
+
+    <main class="main">
+
+        <div class="topbar">
+
+            <div class="welcome">
+
+                <h1>Good evening, </h1>
+
+                <p>
+                    Here's your fictional account overview.
+                </p>
+
+            </div>
+
+            <div class="user">
+
+                <span>Demo User</span>
+
+                <div class="avatar">
+                    DU
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ACCOUNT CARDS -->
+
+        <div class="cards">
+
+            <div class="account-card blue">
+
+                <div class="account-name">
+                    Demo Checking
+                </div>
+
+                <div class="balance">
+                    $12,847.32
+                </div>
+
+                <div class="account-number">
+                    •••• 4821
+                </div>
+
+            </div>
+
+
+            <div class="account-card">
+
+                <div class="account-name">
+                    Demo Savings
+                </div>
+
+                <div class="balance">
+                    $8,420.00
+                </div>
+
+                <div class="account-number">
+                    •••• 7315
+                </div>
+
+            </div>
+
+
+            <div class="account-card">
+
+                <div class="account-name">
+                    Total Demo Balance
+                </div>
+
+                <div class="balance">
+                    $21,267.32
+                </div>
+
+                <div class="account-number">
+                    Fictional balance
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- LOWER CONTENT -->
+
+        <div class="content-grid">
+
+
+            <!-- TRANSACTIONS -->
+
+            <div class="panel">
+
+                <h2>Recent transactions</h2>
+
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="transaction-icon">
+                            ☕
+                        </div>
+
+                        <div>
+
+                            <div class="transaction-name">
+                                Demo Coffee Shop
+                            </div>
+
+                            <div class="transaction-date">
+                                September 11, 2026
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="negative">
+                        -$5.75
+                    </div>
+
+                </div>
+
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="transaction-icon">
+                            🎮
+                        </div>
+
+                        <div>
+
+                            <div class="transaction-name">
+                                Demo Game Store
+                            </div>
+
+                            <div class="transaction-date">
+                                September 9, 2026
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="negative">
+                        -$29.99
+                    </div>
+
+                </div>
+
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="transaction-icon">
+                            💰
+                        </div>
+
+                        <div>
+
+                            <div class="transaction-name">
+                                Demo Payroll
+                            </div>
+
+                            <div class="transaction-date">
+                                September 7, 2026
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="positive">
+                        +$2,400.00
+                    </div>
+
+                </div>
+
+
+                <div class="transaction">
+
+                    <div class="transaction-left">
+
+                        <div class="transaction-icon">
+                            🛒
+                        </div>
+
+                        <div>
+
+                            <div class="transaction-name">
+                                Demo Market
+                            </div>
+
+                            <div class="transaction-date">
+                                September 5, 2026
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="negative">
+                        -$46.82
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="panel">
+
+                <h2>Quick actions</h2>
+
+                <div class="action">
+                    <div class="action-icon">💸</div>
+                    <div>Transfer demo money</div>
+                </div>
+
+                <div class="action">
+                    <div class="action-icon">📄</div>
+                    <div>View demo statement</div>
+                </div>
+
+                <div class="action">
+                    <div class="action-icon">💳</div>
+                    <div>Manage demo card</div>
+                </div>
+
+                <div class="action">
+                    <div class="action-icon">⚙️</div>
+                    <div>Account settings</div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div style="
+            margin-top:25px;
+            color:#697386;
+            font-size:12px;
+            text-align:center;
+        ">
+            FakeBank Lab is a fictional offline demonstration.
+            It is not a real financial institution.
+        </div>
+
+    </main>
+
+</section>
+
+
+<script>
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    const eye =
+        document.getElementById("eye");
+
+    if (password.type === "password") {
+        password.type = "text";
+        eye.textContent = "🙈";
+    } else {
+        password.type = "password";
+        eye.textContent = "👁";
+    }
+}
+
+
+function login() {
+
+    const usernameInput =
+        document.getElementById("username");
+
+    let username = usernameInput.value.trim();
+
+    if (username === "") {
+        username = "Demo User";
+    }
+
+    let displayName = username.split("@")[0];
+
+    displayName =
+        displayName.charAt(0).toUpperCase() +
+        displayName.slice(1);
+
+    document.querySelector(".user span").textContent =
+        displayName;
+
+    const parts = displayName.split(/[\s._-]+/);
+
+    let initials = "";
+
+    if (parts.length >= 2) {
+        initials =
+            parts[0].charAt(0) +
+            parts[1].charAt(0);
+    } else {
+        initials =
+            displayName.substring(0, 2);
+    }
+
+    initials = initials.toUpperCase();
+
+    document.querySelector(".avatar").textContent =
+        initials;
+
+    document.querySelector(".welcome h1").textContent =
+        "Good evening, " + displayName;
+
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("app").style.display = "block";
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+    document.getElementById("app").style.display = "none";
+
+    document.getElementById("loginPage").style.display = "flex";
+
+    document.getElementById("username").value = "";
+    document.getElementById("password").value = "";
+
+    document.getElementById("password").type = "password";
+    document.getElementById("eye").textContent = "👁";
+
+    document.querySelector(".user span").textContent = "Demo User";
+    document.querySelector(".avatar").textContent = "DU";
+
+    document.querySelector(".welcome h1").textContent =
+        "Good evening, ";
+}
+
+</script>
+</body>
+</html>
+```
